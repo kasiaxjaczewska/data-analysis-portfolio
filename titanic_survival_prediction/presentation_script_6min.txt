@@ -1,0 +1,108 @@
+Prezentacja (6 minut) — Projekt3: Powtarzalny pipeline klasyfikacyjny (Titanic)
+
+Instrukcja: poniżej rozpisano slajdy. Każdy slajd zawiera: 1) co ma być na slajdzie (punkty/wykresy/tabele), 2) treść do powiedzenia (skrótowy tekst mówiony).
+Gdy potrzebne są liczby, zaznaczono miejsce do wklejenia — dla tabeli podano szkic ASCII. Gdy potrzebny jest wykres, opisano plik do wstawienia.
+
+SLIDE 1 — Tytuł
+- Na slajdzie: tytuł projektu, autor, data, krótki podtytuł: "Powtarzalny pipeline klasyfikacyjny — cechy: `age`, `sex`, `class`".
+- Tekst do powiedzenia:
+  "Dzień dobry. Prezentuję projekt 'Projekt3' — powtarzalny pipeline do przewidywania przeżycia pasażerów Titanica.
+  W ciągu sześciu minut przedstawię dane i preprocessing, przebadane modele, metryki oraz rekomendowany model końcowy."
+
+SLIDE 2 — Cel i dane
+- Na slajdzie: krótkie punkty: cel, źródło danych, liczba rekordów, liczba cech użytych w eksperymencie, odsetek braków w `age`.
+- Tabela z wartościami (z datasetu `data/titanic_full.csv` i przygotowania eksperymentu):
+  +----------------------+-----------------------------+
+  | Cecha                | Wartość                     |
+  +----------------------+-----------------------------+
+  | Liczba rekordów      | 891                         |
+  | Liczba cech (użyte)  | 3 (age, sex, class)         |
+  | Odsetek braków (age) | 19.87% (177 braków)         |
+  +----------------------+-----------------------------+
+- Tekst do powiedzenia:
+  "Zadaniem było zbudowanie powtarzalnego procesu od przygotowania danych po zapis modelu. W eksperymencie wykorzystano trzy cechy: `age`, `sex` i `class`. Zbiór zawiera 891 rekordów; w kolumnie `age` brakowało 177 wartości, czyli około 19.9%."
+
+SLIDE 3 — Preprocessing (wymagane minimum)
+- Na slajdzie: bullets: imputacja braków (age), normalizacja/skaling, one‑hot encoding dla Csex` i `class`, zachowanie pipeline (ColumnTransformer).
+- Tekst do powiedzenia:
+  "Wstępny preprocessing obejmuje: uzupełnianie braków w `age` (mediana), kodowanie kategorii przez One‑Hot, oraz skalowanie cech numerycznych. Te kroki są opakowane w `ColumnTransformer` i sklearn `Pipeline`, co zapewnia powtarzalność i poprawne stosowanie transformacji do nowych danych."
+
+SLIDE 4 — Modele (przegląd wymogów)
+- Na slajdzie: lista modeli (co najmniej 5) z jednym zdaniem każdy:
+  - Logistic Regression (baseline, szybki, probabilistyczny)
+  - Random Forest (ensemble, inspekcja cech)
+  - SVM (kernel RBF, nieliniowe granice)
+  - K‑Nearest Neighbors (zróżnicowanie z `k` i weights)
+  - Gaussian Naive Bayes (prosty, probabilistyczny)
+- Tekst do powiedzenia:
+  "Przetestowano co najmniej pięć modeli: `LogisticRegression`, `RandomForest`, `SVM`, `KNN` i `GaussianNB`. Modele znacząco się różnią pod względem idei: regresja liniowa, las drzew decyzyjnych, metoda jądrowa, metoda instancyjna i model probabilistyczny. Dla każdego wykonano grid search po wybranych hiperparametrach."
+
+Krótkie omówienie modeli i hiperparametrów
+- Na slajdzie: skrócone opisy (po jednym zdaniu + kluczowe hiperparametry):
+  - `LogisticRegression`: C (regularyzacja), solver; dobrze kalibruje prawdopodobieństwa.
+  - `RandomForest`: n_estimators, max_depth, min_samples_split; stabilność i feature_importances_.
+  - `SVM`: C, kernel, gamma; kontrola marginesu i złożoności granic decyzyjnych.
+  - `KNN`: n_neighbors (k), weights (uniform/distance), p (metryka); lokalna decyzja zależna od k.
+  - `GaussianNB`: var_smoothing; prosty, szybki, zakłada niezależność cech.
+- Tekst do powiedzenia:
+  "Dla każdego modelu dobrano sensowne zakresy hiperparametrów: np. `n_estimators` i `max_depth` dla lasu, `k` i `weights` dla KNN, `C` i `gamma` dla SVM. Te parametry wpływają na bias‑variance tradeoff i stabilność wyników."
+
+SLIDE 5 — Metryki oceny i tabele wyników
+- Na slajdzie: tabela wyników testowych (dla każdego modelu: accuracy, F1, precision, recall, ROC AUC, log_loss) pobrane z `training_report.json`.
+- Tabela wyników testowych:
+  +----------------------+---------+-------+-------+-------+--------+-----------+
+  | Model                | Acc     | F1    | Prec  | Rec   | ROC AUC| log_loss  |
+  +----------------------+---------+-------+-------+-------+--------+-----------+
+  | LogisticRegression   | 0.7877  | 0.7206| 0.7313| 0.7101| 0.8339 | 0.4763    |
+  | RandomForest         | 0.8156  | 0.7442| 0.8000| 0.6957| 0.8178 | 1.9656    |
+  | SVM                  | 0.7765  | 0.6875| 0.7458| 0.6377| 0.8437 | 0.5110    |
+  | KNN                  | 0.8212  | 0.7500| 0.8136| 0.6957| 0.8109 | 3.2558    |
+  | GaussianNB           | 0.7709  | 0.6870| 0.7258| 0.6522| 0.8322 | 0.7112    |
+  +----------------------+---------+-------+-------+-------+--------+-----------+
+- Tekst do powiedzenia:
+  "Powyżej przedstawiono wyniki uzyskane na wydzielonym zbiorze testowym (20%). Dla porównania stabilności użyto repeated CV; przykładowo `LogisticRegression` w repeated CV osiągnęła średnie: accuracy 0.792 ± 0.031, F1 0.724 ± 0.039, ROC AUC 0.849 ± 0.026 oraz najniższy log_loss ≈ 0.453, co świadczy o dobrej kalibracji probabilistycznej."
+
+SLIDE 6 — Krótkie omówienie wykresów uczenia i macierzy pomyłek
+- Na slajdzie: wstawione pliki (wskazówki):
+  - learning curves: `best_<model>_learning_curve.png` (np. `best_logistic_regression_learning_curve.png`, `best_random_forest_learning_curve.png`)
+  - ROC/PR: `best_<model>_roc.png`, `best_<model>_pr.png`
+  - Confusion matrices: `best_<model>_confusion_matrix.png`
+- Tekst do powiedzenia:
+  "Learning curves pokazują dopasowanie modelu względem liczby próbek — użyto ich do wykrycia under/overfittingu. Macierze pomyłek pokazują rozkład błędów klas. Proszę wstawić odpowiednie wykresy wygenerowane w folderze projektu."
+
+SLIDE 7 — Feature importance i permutation importance
+- Na slajdzie: plik `rf_feature_importances.png` oraz podsumowanie `rf_permutation_importance.csv` — krótka tabela: sex, class, age z mean importance.
+- Tabela (Gini importances z `rf_feature_importances.csv` oraz permutation importance z `rf_permutation_importance.csv`):
+  +----------------------+---------+-----------------+
+  | Feature              | Gini    | Permutation(F1) |
+  +----------------------+---------+-----------------+
+  | age                  | 0.4387  | 0.1025 ± 0.0238 |
+  | sex (male/female)    | 0.4007* | 0.3038 ± 0.0492 |
+  | class (1/2/3)        | 0.1606  | 0.1390 ± 0.0278 |
+  +----------------------+---------+-----------------+
+  * `sex` Gini = sum(cat__sex_male, cat__sex_female) from feature importances
+  (Importances Gini zostały policzone osobno dla obu kolumn, a potem zsumowane:
+Gini(sex)=Gini(cat__sex_male)+Gini(cat__sex_female))
+
+- Tekst do powiedzenia:
+  "Feature importances z Random Forest (Gini) wskazują największy wkład `age` — jednak permutation importance, mierzące realny wpływ na F1, pokazuje, że `sex` jest najbardziej krytyczna (mean ≈ 0.304), następnie `class`, a na końcu `age`. Różnica wynika z mechaniki Gini i kodowania One‑Hot."
+
+SLIDE 8 — Wybór modelu końcowego i uzasadnienie
+- Na slajdzie: decyzja + jeden wykres potwierdzający wybór.
+- Najlepszy obraz do wstawienia: `best_logistic_regression_roc.png`.
+- Opcjonalnie jako mały drugi obraz: `best_logistic_regression_confusion_matrix.png`.
+- Krótka tabelka do notatek:
+  +----------------------+---------+
+  | Metryka              | Wartość |
+  +----------------------+---------+
+  | Accuracy             | 0.7877  |
+  | F1                   | 0.7206  |
+  | ROC AUC              | 0.8339  |
+  | log_loss             | 0.4763  |
+  | CV ROC AUC mean      | 0.8495  |
+  | CV log_loss mean     | 0.4529  |
+  +----------------------+---------+
+- Tekst do powiedzenia:
+  "Wybranym modelem pozostaje `LogisticRegression`. Wartości testowe są stabilne, a repeated CV pokazuje najwyższe średnie ROC AUC i najniższy log_loss spośród porównywanych modeli. To oznacza, że model dobrze porządkuje przypadki i daje sensowne prawdopodobieństwa, więc jest najlepszym kompromisem między skutecznością a interpretowalnością."
+- Krótkie uzasadnienie pod slajdem:
+  "`LogisticRegression` jest najlepszy, bo daje najbardziej stabilne wyniki w repeated CV, ma najwyższe ROC AUC średnio i najniższy log_loss, więc najlepiej łączy skuteczność z dobrą kalibracją oraz prostą interpretacją."

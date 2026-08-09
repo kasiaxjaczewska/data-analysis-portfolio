@@ -1,0 +1,4 @@
+Przewidywanie przeżycia pasażerów Titanica.
+Dane wejściowe: wiek, płeć, klasa.
+Typ zadania: klasyfikacja.
+Źródło: klasyczny zbiór Titanic z Kaggle.
