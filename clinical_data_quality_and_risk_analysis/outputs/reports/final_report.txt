@@ -1,0 +1,65 @@
+Clinical Data Quality & Risk Analysis Report
+=========================================
+
+Executive Summary
+-----------------
+This report summarizes the results of a simulated clinical data quality and risk analysis. The objective was to identify data quality issues, detect laboratory anomalies, assess site-level risk, and highlight which clinical sites should be prioritized for further investigation.
+
+Key Findings
+------------
+1. Site 104 showed the highest level of concern across the dataset.
+2. The most problematic variable was lab_value due to the presence of missing values and laboratory anomalies.
+3. Missing data was concentrated in a small number of sites, especially Site 104 and Site 102.
+4. Anomalous laboratory results were detected and were concentrated in specific sites and visit levels.
+5. The risk scoring framework identified Site 104 as the main priority for follow-up review.
+
+Data Quality Assessment
+-----------------------
+- Total records analyzed: 1,200
+- Total duplicate records: 0
+- Total missing values: 46
+- Missing values were concentrated in lab_value, which had the highest missingness rate.
+- No major invalid values were detected in the core fields such as age, visit_date, missing_lab, or protocol_deviation.
+
+Site-Level Findings
+-------------------
+The following sites were identified as having the greatest data quality concerns:
+- Site 104: highest missing data rate, elevated delayed data entry, and a high overall risk score.
+- Site 102: elevated missing data rate and moderate risk signals.
+- Site 101: moderate missingness and elevated protocol deviation activity.
+
+The following sites appeared to be lower risk and did not require immediate follow-up:
+- Site 103
+- Site 105
+- Site 106
+- Site 107
+- Site 108
+
+Risk Indicators
+---------------
+The risk score was computed using the following formula:
+Risk Score = 0.4 × missing_data_rate + 0.3 × protocol_deviation_rate + 0.3 × delayed_entry_rate
+
+The highest risk site was Site 104, with a score that was clearly above the rest of the sites. This suggests that the site may require additional review of data entry practices, protocol adherence, and data completeness.
+
+Anomaly Detection
+-----------------
+Laboratory anomalies were detected using three simple methods:
+- IQR rule
+- Z-score
+- MAD (Median Absolute Deviation)
+
+A total of 39 suspicious laboratory observations were identified. These anomalies were associated with specific sites and visit levels, further supporting the need for targeted review of affected records.
+
+Statistical Summary
+-------------------
+The laboratory values showed a mean of approximately 91.36 and a median of approximately 91.43, indicating a relatively balanced central tendency. The distribution also contained a small number of extreme values, which were flagged as potential anomalies.
+
+Conclusion
+----------
+The sites that require further investigation are primarily:
+- Site 104
+- Site 102
+- Site 101
+
+These sites showed the strongest evidence of data quality concerns, including missing values, delayed data entry, protocol deviations, and abnormal laboratory results. Site 104 should be prioritized first due to the highest combined risk profile.

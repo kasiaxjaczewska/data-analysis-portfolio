@@ -1,0 +1,17 @@
+Anomaly Detection Report
+========================
+
+Total suspicious observations: 39
+
+Top sites by anomaly count:
+- Site_107: 8 anomalies (4.9%)
+- Site_101: 7 anomalies (5.1%)
+- Site_104: 5 anomalies (3.8%)
+- Site_103: 5 anomalies (3.7%)
+- Site_102: 4 anomalies (2.9%)
+
+Top visits by anomaly count:
+- Visit 2: 18 anomalies (5.6%)
+- Visit 4: 9 anomalies (3.9%)
+- Visit 1: 6 anomalies (2.5%)
+- Visit 3: 6 anomalies (1.7%)

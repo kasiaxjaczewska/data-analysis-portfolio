@@ -1,0 +1,15 @@
+Clinical Site Risk Summary
+=========================
+
+Risk Score = 0.4 * missing_data_rate + 0.3 * protocol_deviation_rate + 0.3 * delayed_entry_rate
+
+Site_104: missing=0.144, protocol=0.059, delayed=0.118, risk_score=0.110, label=Medium Risk
+Site_102: missing=0.081, protocol=0.061, delayed=0.000, risk_score=0.051, label=Low Risk
+Site_101: missing=0.080, protocol=0.060, delayed=0.000, risk_score=0.050, label=Low Risk
+Site_103: missing=0.000, protocol=0.000, delayed=0.000, risk_score=0.000, label=Low Risk
+Site_105: missing=0.000, protocol=0.000, delayed=0.000, risk_score=0.000, label=Low Risk
+Site_106: missing=0.000, protocol=0.000, delayed=0.000, risk_score=0.000, label=Low Risk
+Site_107: missing=0.000, protocol=0.000, delayed=0.000, risk_score=0.000, label=Low Risk
+Site_108: missing=0.000, protocol=0.000, delayed=0.000, risk_score=0.000, label=Low Risk
+
+Highest risk site: Site_104 (Medium Risk, score=0.110)

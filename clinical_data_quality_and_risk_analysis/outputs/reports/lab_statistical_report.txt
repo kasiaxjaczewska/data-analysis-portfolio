@@ -1,0 +1,23 @@
+Laboratory Statistical Summary
+=============================
+
+Descriptive statistics for lab_value:
+- mean: 91.358
+- median: 91.431
+- std: 14.595
+- min: -4.692
+- max: 189.539
+- q1: 85.070
+- q3: 97.540
+- iqr: 12.470
+
+Outliers (IQR rule): 32
+Outliers (z-score > 3): 24
+
+Treatment group comparison:
+- t-test statistic: 0.804
+- p-value: 0.422
+
+Site comparison:
+- ANOVA statistic: 0.548
+- p-value: 0.798

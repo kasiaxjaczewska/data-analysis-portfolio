@@ -1,0 +1,43 @@
+Clinical Data Quality Summary
+============================
+Rows: 1200
+Columns: 11
+Duplicates: 0
+Overall missing values: 46
+Invalid or inconsistent values: 0
+
+Missing percentage by column:
+- patient_id: 0.00%
+- site_id: 0.00%
+- age: 0.00%
+- sex: 0.00%
+- visit: 0.00%
+- treatment_group: 0.00%
+- lab_value: 3.83%
+- visit_date: 0.00%
+- data_entry_days: 0.00%
+- missing_lab: 0.00%
+- protocol_deviation: 0.00%
+
+Site-level missing summary:
+- Site_104: 22 missing values (14.4%)
+- Site_102: 12 missing values (8.1%)
+- Site_101: 12 missing values (8.0%)
+- Site_103: 0 missing values (0.0%)
+- Site_105: 0 missing values (0.0%)
+
+Visit-level missing summary:
+- Visit 3: 15 missing values (4.0%)
+- Visit 2: 14 missing values (4.1%)
+- Visit 4: 9 missing values (3.7%)
+- Visit 1: 8 missing values (3.3%)
+
+Most problematic fields:
+- lab_value: missing 3.83%, invalid 0.00%, problem score 3.83
+- site_id: missing 0.00%, invalid 0.00%, problem score 0.00
+- patient_id: missing 0.00%, invalid 0.00%, problem score 0.00
+- age: missing 0.00%, invalid 0.00%, problem score 0.00
+- sex: missing 0.00%, invalid 0.00%, problem score 0.00
+
+Highest-missing site: Site_104 (22 missing values)
+Highest-missing visit: Visit 3 (15 missing values)

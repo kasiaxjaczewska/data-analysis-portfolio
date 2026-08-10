@@ -1,0 +1,12 @@
+field,missing_count,missing_percentage,invalid_count,invalid_percentage,problem_score
+lab_value,46,3.83,0,0.0,3.83
+site_id,0,0.0,0,0.0,0.0
+patient_id,0,0.0,0,0.0,0.0
+age,0,0.0,0,0.0,0.0
+sex,0,0.0,0,0.0,0.0
+visit,0,0.0,0,0.0,0.0
+treatment_group,0,0.0,0,0.0,0.0
+visit_date,0,0.0,0,0.0,0.0
+data_entry_days,0,0.0,0,0.0,0.0
+missing_lab,0,0.0,0,0.0,0.0
+protocol_deviation,0,0.0,0,0.0,0.0
